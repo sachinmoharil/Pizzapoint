@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Checkout Page</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body onload="loadDetails()">
+        <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"  href="index.html">Satya Pizza Point</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="AboutUs.html">About us</a></li>
+                    <li><a href="orderform.html">Order now</a></li>
+                    <li class="active"><a href="checkout.html">View your cart</a></li>
+                    <li><a href="feedback.html">Leave feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Pizza order checkout form</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        <form class="form-horizontal" role="form" id="orderDetailsform" name="orderDetailsForm" method="post" action="">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Size of Pizza :</label>
+                <div class="col-sm-10">
+                    <label id="sizeOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kind Of Pizza :</label>
+                <div class="col-sm-10">
+                    <label id="kindOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Extra Cheese :</label>
+                <div class="col-sm-10">
+                    <label id="cheeseOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Quantity :</label>
+                <div class="col-sm-10">
+                    <label id="quantityOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Total Price :</label>
+                <div class="col-sm-10">
+                    <label id="totalPriceOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" role="form" id="checkoutform" name="pizzaCheckoutForm" method="post" action="">
+            <fieldset>
+                <label>Card Details</label>
+            <div class="form-group">
+                <label class="control-label col-sm-2">First Name :</label>
+                <div class="col-sm-10">
+                    <input type="text" name="firstName" size="30"/>
+                    <label id="firstNameValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Last Name :</label>
+                <div class="col-sm-10">
+                    <input type="text" name="lastname" size="30"/>
+                    <label id="lastNameValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Delivery Address:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="Address" size="50"/>
+                    <label id="deliveryAddressValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Telephone Number:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="phone" size="10"/>
+                    <label id="telephoneNumberValidator" class="errorMessage"></label>
+                </div>
+            </div>
+                
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Sales Type:</label>
+                <div class="col-sm-10">
+                    <input name="SalesType" id="SalesType1" type="radio" value="cash" onchange="creditValidate();"/>Cash
+                        <input name="SalesType" id="SalesType2" type="radio" value="credit" onchange="creditValidate();"/>Credit
+                        <label id="salesTypeValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group" id="creditTyperow">
+                <label class="control-label col-sm-2" >Credit Card Type:</label>
+                <div class="col-sm-10">
+                    <input name="creditType" type="radio" id="creditType1" value="AX"/>American Express
+                    <input name="creditType" type="radio" value="v" id="creditType2"/>Visa
+                    <label id="creditCardTypeValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group" id="creditNumberrow">
+                <label class="control-label col-sm-2" >Credit Card Number:</label>
+                <div class="col-sm-10">
+                    <input name="creditNumber" type="text" size="16"/>
+                    <label id="creditCardNumberValidator" class="errorMessage"></label>
+                </div>
+            </div>
+                <div class="form-group" id="creditExpirationrow">
+                <label class="control-label col-sm-2" >Credit Card Expiration Date:</label>
+                <div class="col-sm-10">
+                    <input name="expiryDate" type="date" />
+                    <label id="expirationDateValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="button" class="btn btn-default" value="Finalize" onclick="finalize()" />
+                    <input type="button" class="btn btn-default"  value="Add to Cart" onclick="addToCart()" />
+                </div>
+            </div>
+            </fieldset>
+        </form>
+        <hr>
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-sm-12">
+                <footer>
+                    <p>© Copyright 2015</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+            
+        function loadDetails() {
+                creditValidate();
+                document.getElementById("sizeOfPizza").innerHTML = localStorage.getItem("sizeOfPizza");
+                document.getElementById("kindOfPizza").innerHTML = localStorage.getItem("kindOfPizza");
+                document.getElementById("quantityOfPizza").innerHTML = localStorage.getItem("quantityOfPizza");
+                document.getElementById("totalPriceOfPizza").innerHTML = localStorage.getItem("totalPriceOfPizza");
+                document.getElementById("cheeseOfPizza").innerHTML = localStorage.getItem("cheeseOfPizza");
+            }
+            function validate() {
+                var error=false;
+                var firstName=document.pizzaCheckoutForm.firstName.value;
+                var lastName=document.pizzaCheckoutForm.lastname.value;
+                if(firstName=="") {
+                    document.getElementById("firstNameValidator").innerHTML="Please enter first name";   
+                    error = true;
+                }
+                else
+                {
+                    if(firstName.length>20)
+                    {
+                        document.getElementById("firstNameValidator").innerHTML="First Name should be inbetween 1 and 20 characters length";
+                        error=true;
+                    }
+                    else
+                    {
+                        document.getElementById("firstNameValidator").innerHTML="";
+                    }                    
+                }
+                if(lastName=="") {
+                    document.getElementById("lastNameValidator").innerHTML="Please enter last name";   
+                    error = true;
+                }
+                else
+                {
+                    if(lastName.length>25)
+                    {
+                        document.getElementById("lastNameValidator").innerHTML="Last Name should be inbetween 1 and 25 characters length";
+                        error=true;
+                    }
+                    else
+                    {
+                        document.getElementById("lastNameValidator").innerHTML="";
+                    }
+                }
+                
+                if(document.pizzaCheckoutForm.Address.value=="") {
+                    document.getElementById("deliveryAddressValidator").innerHTML="Please enter Address";   
+                    error = true;
+                }
+                else
+                {
+                    document.getElementById("deliveryAddressValidator").innerHTML="";   
+                }
+                
+                var phone=document.pizzaCheckoutForm.phone.value;
+                
+                if(phone=="") {
+                    document.getElementById("telephoneNumberValidator").innerHTML="Please enter phone number";   
+                    error = true;
+                }
+                else {
+                    if(isNaN(phone))
+                    {
+                        document.getElementById("telephoneNumberValidator").innerHTML="Please enter phone number in correct format";
+                        error= true;
+                    }
+                    else
+                    {
+                        if(!phonenumber(phone)) 
+                        {
+                            document.getElementById("telephoneNumberValidator").innerHTML="Please enter phone number in correct format";
+                            error= true;
+                        }
+                        else
+                            document.getElementById("telephoneNumberValidator").innerHTML="";   
+                    }
+                }
+                
+                if(document.pizzaCheckoutForm.SalesType.value=="") {
+                    document.getElementById("salesTypeValidator").innerHTML="Please enter sales type";   
+                    error = true;
+                }
+                else
+                {
+                    document.getElementById("salesTypeValidator").innerHTML="";   
+                }
+                
+                var salesType=creditValidate();
+                if(salesType=="Credit") {
+                    if(document.pizzaCheckoutForm.creditType.value=="") {
+                        document.getElementById("creditCardTypeValidator").innerHTML="Please enter credit type";   
+                        error = true;
+                    }
+                    else
+                    {
+                        document.getElementById("creditCardTypeValidator").innerHTML="";   
+                    }
+                    if(document.pizzaCheckoutForm.creditNumber.value=="") {
+                            document.getElementById("creditCardNumberValidator").innerHTML="Please enter credit number";   
+                            error = true;
+                    }
+                    else
+                    {
+                        var cardNumberValidation=cardnumber(document.pizzaCheckoutForm.creditNumber.value);
+                        if(!cardNumberValidation) {
+                            error = true;
+                        }
+                        else {
+                            document.getElementById("creditCardNumberValidator").innerHTML='';   
+                        }   
+                    }
+                    if(document.pizzaCheckoutForm.expiryDate.value=="") {
+                        document.getElementById("expirationDateValidator").innerHTML="Please enter expiry date";   
+                        error = true;
+                    }
+                    else
+                    {
+                        document.getElementById("expirationDateValidator").innerHTML="";   
+                    }
+                }
+                return !error;
+            }
+            function creditValidate() {
+                var salesType="";
+                if (document.getElementById('SalesType1').checked) {
+                    salesType="Cash";
+                    document.getElementById("creditTyperow").style.display = 'none';
+                    document.getElementById("creditNumberrow").style.display = 'none';
+                    document.getElementById("creditExpirationrow").style.display = 'none';
+                }
+                else
+                {
+                    document.getElementById("creditTyperow").style.display = '';
+                    document.getElementById("creditNumberrow").style.display = '';
+                    document.getElementById("creditExpirationrow").style.display = '';
+                }
+                
+                if (document.getElementById('SalesType2').checked) {
+                    salesType="Credit";
+                    document.getElementById("creditTyperow").style.display = '';
+                    document.getElementById("creditNumberrow").style.display = '';
+                    document.getElementById("creditExpirationrow").style.display = '';
+                }
+                else
+                {
+                    document.getElementById("creditTyperow").style.display = 'none';
+                    document.getElementById("creditNumberrow").style.display = 'none';
+                    document.getElementById("creditExpirationrow").style.display = 'none';
+                }   
+                return salesType;
+            }
+            
+            function cardnumber(inputtxt)  
+            {
+                var amexCardno = /^(?:3[47][0-9]{13})$/;  
+                var visaCardno = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+                
+                var cardType=0;
+                
+                
+                if (document.getElementById('creditType1').checked) {
+                    cardType=1;
+                }
+                if (document.getElementById('creditType2').checked) {
+                    cardType=2;
+                }
+                
+                var compareValue="";
+                
+                
+                if(cardType==1) //1==Amex
+                {
+                    compareValue=amexCardno;
+                }
+                else if(cardType==2) //2==Visa
+                {
+                    compareValue=visaCardno;
+                }
+                else
+                    return false;
+                
+                if(inputtxt.match(compareValue))  
+                {  
+                    return true;  
+                }  
+                else  
+                { //not a visa or amex card 
+                    if(cardType==1) //1==Amex
+                    {
+                        document.getElementById("creditCardNumberValidator").innerHTML="Entered number is not in American Express format: XXXX-XXXXXX-XXXXX";
+                    }
+                    else if(cardType==2) //2==Visa
+                    {
+                        document.getElementById("creditCardNumberValidator").innerHTML="Entered number is not in Visa format: XXXX-XXXX-XXXX-XXXX";
+                    }
+                    return false;  
+                }  
+            }  
+            
+            function phonenumber(inputtxt)  
+            {  
+                var phoneno = /^\d{10}$/;  
+                if(inputtxt.match(phoneno))  
+                {  
+                    return true;  
+                }  
+                else  
+                {  
+                    return false;  
+                }  
+            } 
+            function finalize() {
+                if(validate()) {
+                    var orderNumber=Math.floor((Math.random() * 1000) + 1);
+                    if (typeof(Storage) != "undefined") {
+                        localStorage.setItem("firstName", document.pizzaCheckoutForm.firstName.value);
+                        localStorage.setItem("lastname", document.pizzaCheckoutForm.lastname.value);
+                        localStorage.setItem("Address", document.pizzaCheckoutForm.Address.value);
+                        localStorage.setItem("phone", document.pizzaCheckoutForm.phone.value);
+                        localStorage.setItem("SalesType", document.pizzaCheckoutForm.SalesType.value);
+                        localStorage.setItem("creditType", document.pizzaCheckoutForm.creditType.value);
+                        localStorage.setItem("creditNumber", document.pizzaCheckoutForm.creditNumber.value);
+                        localStorage.setItem("expiryDate", document.pizzaCheckoutForm.expiryDate.value);
+                        localStorage.setItem("orderNumber", orderNumber);
+                    }
+                    location.href="finalize.html";
+                }
+            }
+        </script>
+        
+</body>
+</html>

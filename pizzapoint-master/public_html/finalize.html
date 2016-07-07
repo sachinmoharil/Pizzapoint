@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Order Confirmation</title>
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body onload="loadDetails()">
+        <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"  href="index.html">Satya Pizza Point</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="AboutUs.html">About us</a></li>
+                    <li><a href="orderform.html">Order now</a></li>
+                    <li><a href="checkout.html">View your cart</a></li>
+                    <li><a href="feedback.html">Leave feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Order Confirmation</h1>
+                Thanks for your order, here are your order details.
+            </div>
+        </div>
+        <!-- /.row -->
+        <form class="form-horizontal" role="form" id="orderDetailsform" name="orderDetailsForm" method="post" action="">
+            <fieldset>
+                <label>Order Details</label>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Order Number :</label>
+                <div class="col-sm-10">
+                    <label id="orderNumber" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Size of Pizza :</label>
+                <div class="col-sm-10">
+                    <label id="sizeOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kind Of Pizza :</label>
+                <div class="col-sm-10">
+                    <label id="kindOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Extra Cheese :</label>
+                <div class="col-sm-10">
+                    <label id="cheeseOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Quantity :</label>
+                <div class="col-sm-10">
+                    <label id="quantityOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Total Price :</label>
+                <div class="col-sm-10">
+                    <label id="totalPriceOfPizza" class="detailMessage"></label>
+                </div>
+            </div>
+            </fieldset>
+        </form> 
+        <form class="form-horizontal" role="form" id="checkoutform" name="pizzaCheckoutForm" method="post" action="">
+            <fieldset>
+                <label>Card Details</label>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">First Name :</label>
+                    <div class="col-sm-10">
+                        <label id="firstName" class="detailMessage"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                <label class="control-label col-sm-2">Last Name :</label>
+                <div class="col-sm-10">
+                    <label id="lastname" class="detailMessage"></label>
+                </div>
+            </div>
+                <div class="form-group">
+                <label class="control-label col-sm-2">Delivery Address:</label>
+                <div class="col-sm-10">
+                    <label id="Address" class="detailMessage"></label>
+                </div>
+            </div>
+                <div class="form-group">
+                <label class="control-label col-sm-2" >Telephone Number:</label>
+                <div class="col-sm-10">
+                    <label id="phone" class="detailMessage"></label>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" >Sales Type:</label>
+                <div class="col-sm-10">
+                    <label id="SalesType" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group" id="creditTyperow">
+                <label class="control-label col-sm-2" >Credit Card Type:</label>
+                <div class="col-sm-10">
+                    <label id="creditType" class="detailMessage"></label>
+                </div>
+            </div>
+            <div class="form-group" id="creditNumberrow">
+                <label class="control-label col-sm-2" >Credit Card Number:</label>
+                <div class="col-sm-10">
+                    <label id="creditNumber" class="detailMessage"></label>
+                </div>
+            </div>
+                <div class="form-group" id="creditExpirationrow">
+                <label class="control-label col-sm-2" >Credit Card Expiration Date:</label>
+                <div class="col-sm-10">
+                    <label id="expiryDate" class="detailMessage"></label>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+       <!-- Footer -->
+        <div class="row">
+            <div class="col-sm-12">
+                <footer>
+                    <p>© Copyright 2015</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+            function loadDetails() {
+                document.getElementById("orderNumber").innerHTML = localStorage.getItem("orderNumber");
+                document.getElementById("sizeOfPizza").innerHTML = localStorage.getItem("sizeOfPizza");
+                document.getElementById("kindOfPizza").innerHTML = localStorage.getItem("kindOfPizza");
+                document.getElementById("quantityOfPizza").innerHTML = localStorage.getItem("quantityOfPizza");
+                document.getElementById("totalPriceOfPizza").innerHTML = localStorage.getItem("totalPriceOfPizza");
+                document.getElementById("cheeseOfPizza").innerHTML = localStorage.getItem("cheeseOfPizza");
+                document.getElementById("firstName").innerHTML = localStorage.getItem("firstName");
+                document.getElementById("lastname").innerHTML = localStorage.getItem("lastname");
+                document.getElementById("Address").innerHTML = localStorage.getItem("Address");
+                document.getElementById("phone").innerHTML = localStorage.getItem("phone");
+                
+                document.getElementById("SalesType").innerHTML = localStorage.getItem("SalesType");
+                document.getElementById("creditType").innerHTML = localStorage.getItem("creditType");
+                    document.getElementById("creditNumber").innerHTML = localStorage.getItem("creditNumber");
+                    document.getElementById("expiryDate").innerHTML = localStorage.getItem("expiryDate"); 
+                    
+                if(localStorage.getItem("SalesType")=='cash') {
+                    
+                document.getElementById("creditTyperow").style.display = 'none';
+                    document.getElementById("creditNumberrow").style.display = 'none';
+                    document.getElementById("creditExpirationrow").style.display = 'none';
+                }
+            }
+        </script>
+</body>
+</html>

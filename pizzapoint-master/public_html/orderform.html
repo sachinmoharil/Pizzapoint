@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Pizza Order Form</title>
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"  href="index.html">Satya Pizza Point</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="AboutUs.html">About us</a></li>
+                    <li class="active"><a href="orderform.html">Order now</a></li>
+                    <li><a href="checkout.html">View your cart</a></li>
+                    <li><a href="feedback.html">Leave feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Pizza order form</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        <form class="form-horizontal" role="form" id="orderform" name="pizzaOrderForm" method="post" action="postAddOrder">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Size of Pizza :</label>
+                <div class="col-sm-10">
+                    <select name="SizeofPizza" >
+                        <option>Please Select Pizza size</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                    <label id="SizeOfPizzaValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kind Of Pizza :</label>
+                <div class="col-sm-10">
+                    <input name="PizzaTypes" id="pizzaType1" type="radio" value="9.99"/>Vegetarian
+                    <input name="PizzaTypes" id="pizzaType2" type="radio" value="8.99"/>Pepperoni
+                    <input name="PizzaTypes" id="pizzaType3" type="radio" value="10.99"/>Combo
+                    <label id="KindOfPizzaValidator" class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Extra Cheese :</label>
+                <div class="col-sm-10">
+                    <input name="Cheese" type="checkbox"  value="2"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Quantity :</label>
+                <div class="col-sm-10">
+                    <input name=quantity type="text" size="25"/>
+                    <input type="button" name="calc" value="Calculate"  onclick="calculate()" />
+                    <label id="QuantityValidator"  class="errorMessage"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label id="price"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="button" class="btn btn-default"  value="Add to Cart" onclick="addToCart()" />
+                </div>
+            </div>
+        </form>
+        
+        <hr>
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-sm-12">
+                <footer>
+                    <p>© Copyright 2015</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function calculate(){
+                document.getElementById("price").innerHTML="";
+                if(validate()) 
+                {
+                    var cheese=2;
+                    var totalPrice=0;
+                    if(document.pizzaOrderForm.SizeofPizza.value=='Small') {
+                        totalPrice+=parseFloat(document.pizzaOrderForm.PizzaTypes.value);
+                    }
+                    else if(document.pizzaOrderForm.SizeofPizza.value=='Medium') {
+                        totalPrice+=parseFloat(document.pizzaOrderForm.PizzaTypes.value)+1;
+                    }
+                    else if(document.pizzaOrderForm.SizeofPizza.value=='Large') {
+                        totalPrice+=parseFloat(document.pizzaOrderForm.PizzaTypes.value)+2;
+                    }
+                    if(document.pizzaOrderForm.Cheese.checked){
+                        localStorage.setItem("cheeseOfPizza", "selected extra cheese");
+                        totalPrice+=cheese;
+                    }
+                    else
+                        localStorage.setItem("cheeseOfPizza", "No extra cheese selected");
+                    
+                    totalPrice=totalPrice*parseFloat(document.pizzaOrderForm.quantity.value);
+                    localStorage.setItem("totalPriceOfPizza", totalPrice);
+                    document.getElementById("price").innerHTML="Cost of Selected pizza "+totalPrice;
+                }
+            }
+            function validate() {
+                var error=false;
+                if(document.pizzaOrderForm.SizeofPizza.value=="Please Select Pizza size") {
+                    document.getElementById("SizeOfPizzaValidator").innerHTML="Please select size of pizza";   
+                    error = true;
+                }
+                else
+                {
+                    document.getElementById("SizeOfPizzaValidator").innerHTML="";   
+                }
+                if(document.pizzaOrderForm.PizzaTypes.value=="") {
+                    document.getElementById("KindOfPizzaValidator").innerHTML="Please select kind of pizza";   
+                    error= true;
+                }
+                else
+                {
+                    document.getElementById("KindOfPizzaValidator").innerHTML="";   
+                }
+                if(document.pizzaOrderForm.quantity.value==""){
+                    document.getElementById("QuantityValidator").innerHTML="Please select the quantity of pizza";
+                    error= true;
+                }
+                else 
+                {
+                    var quantity=document.pizzaOrderForm.quantity.value;
+                    if(isNaN(quantity))
+                    {
+                        document.getElementById("QuantityValidator").innerHTML="Please enter a valid number as quantity";
+                        error= true;
+                    }
+                    else
+                    {
+                        if(quantity%1==0)
+                            document.getElementById("QuantityValidator").innerHTML="";
+                        else
+                        {
+                            document.getElementById("QuantityValidator").innerHTML="Decimal numbers are not allowed as quantity";
+                            error= true;
+                        }
+                    }
+                }
+                
+                return !error;
+            }
+            function addToCart() {
+                if(validate())
+                {
+                    if (typeof(Storage) != "undefined") {
+                        // Store
+                        localStorage.setItem("sizeOfPizza", document.pizzaOrderForm.SizeofPizza.value);
+                        
+                        if(document.getElementById("pizzaType1").checked) {
+                            localStorage.setItem("kindOfPizza", "Vegetarian");
+                        
+                        }
+                        if(document.getElementById("pizzaType2").checked) {
+                            localStorage.setItem("kindOfPizza", "Pepperoni");
+                        
+                        }
+                        if(document.getElementById("pizzaType3").checked) {
+                            localStorage.setItem("kindOfPizza", "Combo");
+                        
+                        }
+                        
+                        localStorage.setItem("quantityOfPizza", document.pizzaOrderForm.quantity.value);
+                    } 
+                    location.href="checkout.html";
+                }
+            }
+            
+        </script>
+</body>
+</html>
